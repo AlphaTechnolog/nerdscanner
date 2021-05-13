@@ -92,3 +92,13 @@ DIR dir3
 DIR dir2
     FILE hello1
 ```
+
+## Screenshots
+
+![nerdscanner-1](./.screenshot/nerdscanner.1.png)
+<br>
+![nerdscanner-2](./.screenshot/nerdscanner.2.png)
+<br>
+![nerdscanner-3](./.screenshot/nerdscanner.3.png)
+<br>
+![nerdscanner-4](./.screenshot/nerdscanner.4.png)
