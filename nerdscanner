@@ -51,12 +51,12 @@ dirpath = Path(args.dir)
 
 
 def error(msg: str):
-    print(msg)
+    print(Fore.RED + msg)
     exit(1)
 
 
 if not dirpath.is_dir():
-    error(f"Invalid dir path")
+    error(f"Invalid directory {dirpath}, no such file or directory")
 
 
 def dir_scanner(path: Any, indent: int = 0):
@@ -69,4 +69,7 @@ def dir_scanner(path: Any, indent: int = 0):
 
 
 if __name__ == '__main__':
-    dir_scanner(dirpath)
+    try:
+        dir_scanner(dirpath)
+    except KeyboardInterrupt:
+        error("Interrupted with Ctrl-C")
