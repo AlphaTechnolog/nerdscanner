@@ -127,6 +127,18 @@ With the colors changed
 
 ## Screenshots
 
-![nerdscanner-1](./.screenshot/nerdscanner.1.png)
+![nerdscanner 1](https://user-images.githubusercontent.com/54639968/118077456-18e95f80-b382-11eb-8476-38c0314c5f97.png)
+<br>
+![nerdscanner 2](https://user-images.githubusercontent.com/54639968/118077472-20106d80-b382-11eb-8841-99aac9116b31.png)
+<br>
+![nerdscanner 3](https://user-images.githubusercontent.com/54639968/118077523-3dddd280-b382-11eb-92e9-4a170f3ff90c.png)
+<br>
+![nerdscanner 4](https://user-images.githubusercontent.com/54639968/118077530-4209f000-b382-11eb-8a95-ab3a855585b5.png)
+<br>
+![nerdscanner 5](https://user-images.githubusercontent.com/54639968/118077540-46360d80-b382-11eb-8944-bca6f1eafe4a.png)
 
-For more screenshots see [The screenshots gallery](./.screenshot)
+
+
+
+
+
