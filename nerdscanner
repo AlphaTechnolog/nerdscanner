@@ -68,4 +68,5 @@ def dir_scanner(path: Any, indent: int = 0):
             print((" " * args.indent_size) * indent + f"{FILE_ICON} {archive.name}")
 
 
-dir_scanner(dirpath)
+if __name__ == '__main__':
+    dir_scanner(dirpath)
