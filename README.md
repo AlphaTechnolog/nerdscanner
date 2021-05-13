@@ -75,8 +75,12 @@ To custom the output pass the next options:
 - `-i/--indent-size`: The indent size
 - `-F/--file-icon`: The file icon or prefix
 - `-D/--dir-icon`: The directory icon or prefix
+- `-dc`/`--dir-color`: The directory icon color
+- `-fc`/`--file-color`: The file icon color
 
-Examples:
+For more information use: `nerdscanner --help`
+
+### Examples
 
 ```sh
 nerdscanner $HOME/testdir -i 4 -D "DIR" -F "FILE"
@@ -93,12 +97,25 @@ DIR dir2
     FILE hello1
 ```
 
+```sh
+nerdscanner $HOME/testdir -i 2 -dc magenta -fc red
+```
+
+```
+ dir1
+   dir2
+     hello1
+ hello2
+ hello1
+ dir3
+ dir2
+   hello1
+```
+
+With the colors changed
+
 ## Screenshots
 
 ![nerdscanner-1](./.screenshot/nerdscanner.1.png)
-<br>
-![nerdscanner-2](./.screenshot/nerdscanner.2.png)
-<br>
-![nerdscanner-3](./.screenshot/nerdscanner.3.png)
-<br>
-![nerdscanner-4](./.screenshot/nerdscanner.4.png)
+
+For more screenshots see [The screenshots gallery](./.screenshot)

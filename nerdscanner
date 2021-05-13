@@ -7,6 +7,17 @@ from argparse import ArgumentParser
 
 init(autoreset=True)
 
+colors = {
+    "blue": Fore.BLUE,
+    "green": Fore.GREEN,
+    "black": Fore.BLACK,
+    "magenta": Fore.MAGENTA,
+    "red": Fore.RED,
+    "cyan": Fore.CYAN,
+    "reset": Fore.RESET,
+    "yellow": Fore.YELLOW
+}
+
 parser = ArgumentParser(prog="nerdscanner", description="Scan a dir content with the nerdfonts icons")
 
 parser.add_argument('dir', help='The dir path')
@@ -14,15 +25,27 @@ parser.add_argument('-F', '--file-icon', help='The file icon', default='')
 parser.add_argument('-D', '--dir-icon', help='The folder icon', default='')
 parser.add_argument('-i', '--indent-size', help='The indent size', default=2, type=int)
 
+parser.add_argument(
+    "-dc", "--dir-color",
+    choices=colors.keys(),
+    default='blue', help='The dir icon color'
+)
+
+parser.add_argument(
+    '-fc', '--file-color',
+    choices=colors.keys(),
+    default='green', help="The file icon color"
+)
+
 args = parser.parse_args()
 
 
 def icon(color: Any, icon: str) -> str:
-    return color + icon + Fore.RESET
+    return colors[color] + icon + Fore.RESET
 
 
-FOLDER_ICON = icon(Fore.BLUE, args.dir_icon)
-FILE_ICON = icon(Fore.GREEN, args.file_icon)
+FOLDER_ICON = icon(args.dir_color, args.dir_icon)
+FILE_ICON = icon(args.file_color, args.file_icon)
 
 dirpath = Path(args.dir)
 
