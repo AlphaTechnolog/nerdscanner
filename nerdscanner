@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+from colorama import init, Fore
+from os import scandir
+from pathlib import Path
+from typing import Any
+from argparse import ArgumentParser
+
+init(autoreset=True)
+
+parser = ArgumentParser(prog="nerdscanner", description="Scan a dir content with the nerdfonts icons")
+
+parser.add_argument('dir', help='The dir path')
+parser.add_argument('-F', '--file-icon', help='The file icon', default='')
+parser.add_argument('-D', '--dir-icon', help='The folder icon', default='')
+parser.add_argument('-i', '--indent-size', help='The indent size', default=2, type=int)
+
+args = parser.parse_args()
+
+
+def icon(color: Any, icon: str) -> str:
+    return color + icon + Fore.RESET
+
+
+FOLDER_ICON = icon(Fore.BLUE, args.dir_icon)
+FILE_ICON = icon(Fore.GREEN, args.file_icon)
+
+dirpath = Path(args.dir)
+
+
+def error(msg: str):
+    print(msg)
+    exit(1)
+
+
+if not dirpath.is_dir():
+    error(f"Invalid dir path")
+
+
+def dir_scanner(path: Any, indent: int = 0):
+    for archive in scandir(path):
+        if archive.is_dir():
+            print((" " * args.indent_size) * indent + ' ' + f"{FOLDER_ICON} {archive.name}")
+            dir_scanner(archive, indent + 1)
+        else:
+            if not path is dirpath:
+                print((" " * args.indent_size) * indent + ' ' + f"{FILE_ICON} {archive.name}")
+            else:
+                print((" " * args.indent_size) * indent + '' + f"{FILE_ICON} {archive.name}")
+
+
+print(f"{FOLDER_ICON} {dirpath.name}")
+dir_scanner(dirpath)
