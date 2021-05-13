@@ -1,37 +1,132 @@
-## Welcome to GitHub Pages
+# nerdscanner
 
-You can use the [editor on GitHub](https://github.com/AlphaTechnolog/nerdscanner/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Inspired in the traditional tree command for linux. Show a recursive
+folder tree with the nerdfonts icons, icons for folders, icons, and
+use colors for the output.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Requirements
 
-### Markdown
+The requirements list are:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- A very pretty linux distribution
+- A nerd font used in your terminal
+- A very good and pretty configured terminal
+- Python
+- Git
+- Bash
 
-```markdown
-Syntax highlighted code block
+## Install
 
-# Header 1
-## Header 2
-### Header 3
+To install use the following commands:
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```sh
+mkdir ~/repo
+cd ~/repo
+git clone https://github.com/AlphaTechnolog/nerdscanner.git
+cd nerdscanner
+./install.sh # Please write your password to create folders in /opt and files in /usr/bin
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Uninstall
 
-### Jekyll Themes
+To uninstall use the `uninstall.sh` script:
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/AlphaTechnolog/nerdscanner/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```sh
+cd $NERDSCANNERPATH
+./uninstall.sh
+```
 
-### Support or Contact
+## Getting started
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+First create a testdir
+
+```sh
+cd $HOME
+mkdir -p testdir/dir1 testdir/dir2 testdir/dir3
+touch testdir/hello1 testdir/hello2
+ln -s $HOME/testdir/dir2 testdir/dir1/dir2
+ln -s $HOME/testdir/hello1 testdir/dir2
+```
+
+The output with tree is:
+
+```
+/home/gabriel/testdir
+├── dir1
+│   └── dir2 -> /home/gabriel/testdir/dir2
+├── dir2
+│   └── hello1 -> /home/gabriel/testdir/hello1
+├── dir3
+├── hello1
+└── hello2
+```
+
+The output with nerdscanner:
+
+```sh
+nerdscanner $HOME/testdir
+```
+```
+ dir1
+   dir2
+     hello1
+ hello2
+ hello1
+ dir3
+ dir2
+   hello1
+```
+
+the folder color is blue and the file color is green.
+
+## Options
+
+To custom the output pass the next options:
+
+- `-i/--indent-size`: The indent size
+- `-F/--file-icon`: The file icon or prefix
+- `-D/--dir-icon`: The directory icon or prefix
+- `-dc`/`--dir-color`: The directory icon color
+- `-fc`/`--file-color`: The file icon color
+
+For more information use: `nerdscanner --help`
+
+### Examples
+
+```sh
+nerdscanner $HOME/testdir -i 4 -D "DIR" -F "FILE"
+```
+
+```
+DIR dir1
+    DIR dir2
+        FILE hello1
+FILE hello2
+FILE hello1
+DIR dir3
+DIR dir2
+    FILE hello1
+```
+
+```sh
+nerdscanner $HOME/testdir -i 2 -dc magenta -fc red
+```
+
+```
+ dir1
+   dir2
+     hello1
+ hello2
+ hello1
+ dir3
+ dir2
+   hello1
+```
+
+With the colors changed
+
+## Screenshots
+
+![nerdscanner-1](./.screenshot/nerdscanner.1.png)
+
+For more screenshots see [The screenshots gallery](./.screenshot)
