@@ -26,6 +26,19 @@ parser.add_argument('-D', '--dir-icon', help='The folder icon', default=' ')
 parser.add_argument('-i', '--indent-size', help='The indent size', default=2, type=int)
 
 parser.add_argument(
+    "-H", "--hidden",
+    action="store_true",
+    help="Show the hidden files"
+)
+
+parser.add_argument(
+    "-I", "--ignore",
+    nargs="+",
+    default=[], type=str, required=False,
+    help="Ignore dirs and files"
+)
+
+parser.add_argument(
     "-dc", "--dir-color",
     choices=colors.keys(),
     default='blue', help='The dir icon color'
@@ -61,12 +74,22 @@ if not dirpath.is_dir():
 
 def dir_scanner(path: Any, indent: int = 0):
     for archive in scandir(path):
-        if archive.is_dir():
-            print((" " * args.indent_size) * indent + f"{FOLDER_ICON} {archive.name}")
-            dir_scanner(archive, indent + 1)
+        if not args.hidden:
+            if (archive.is_dir() and
+                    not archive.name in args.ignore and
+                    not archive.name.startswith('.')):
+                print((" " * args.indent_size) * indent + f"{FOLDER_ICON} {archive.name}")
+                dir_scanner(archive, indent + 1)
+            elif (not archive.name in args.ignore and
+                    not archive.name.startswith('.')):
+                print((" " * args.indent_size) * indent + f"{FILE_ICON} {archive.name}")
         else:
-            print((" " * args.indent_size) * indent + f"{FILE_ICON} {archive.name}")
-
+            if (archive.is_dir() and
+                    not archive.name in args.ignore):
+                print((" " * args.indent_size) * indent + f"{FOLDER_ICON} {archive.name}")
+                dir_scanner(archive, indent + 1)
+            elif not archive.name in args.ignore:
+                print((" " * args.indent_size) * indent + f"{FILE_ICON} {archive.name}")
 
 if __name__ == '__main__':
     try:
