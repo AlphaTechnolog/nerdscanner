@@ -22,7 +22,7 @@ parser = ArgumentParser(prog="nerdscanner", description="Scan a dir content with
 
 parser.add_argument('dir', help='The dir path')
 parser.add_argument('-F', '--file-icon', help='The file icon', default='')
-parser.add_argument('-D', '--dir-icon', help='The folder icon', default='')
+parser.add_argument('-D', '--dir-icon', help='The folder icon', default=' ')
 parser.add_argument('-i', '--indent-size', help='The indent size', default=2, type=int)
 
 parser.add_argument(
