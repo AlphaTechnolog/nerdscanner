@@ -39,14 +39,10 @@ if not dirpath.is_dir():
 def dir_scanner(path: Any, indent: int = 0):
     for archive in scandir(path):
         if archive.is_dir():
-            print((" " * args.indent_size) * indent + ' ' + f"{FOLDER_ICON} {archive.name}")
+            print((" " * args.indent_size) * indent + f"{FOLDER_ICON} {archive.name}")
             dir_scanner(archive, indent + 1)
         else:
-            if not path is dirpath:
-                print((" " * args.indent_size) * indent + ' ' + f"{FILE_ICON} {archive.name}")
-            else:
-                print((" " * args.indent_size) * indent + '' + f"{FILE_ICON} {archive.name}")
+            print((" " * args.indent_size) * indent + f"{FILE_ICON} {archive.name}")
 
 
-print(f"{FOLDER_ICON} {dirpath.name}")
 dir_scanner(dirpath)
