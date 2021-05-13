@@ -1,4 +1,18 @@
 #!/bin/bash
+show_help() {
+cat << EOF
+usage: $0 [-nr] [-h]
+
+optional arguments:
+    -nr, --no-install-requirements  Don't install the python requirements
+EOF
+exit 0
+}
+
+if [[ $1 == '-h' || $1 == '--help' ]]; then
+    show_help
+fi
+
 printf "Checking for existent installation... "
 
 error() {
@@ -23,4 +37,10 @@ sudo chmod -R 777 /opt/nerdscanner
 printf "OK\nCreating symlink to /usr/bin/nerdscanner... "
 sudo ln -s /opt/nerdscanner/nerdscanner /usr/bin/nerdscanner
 sudo chmod -R 777 /usr/bin/nerdscanner
-echo "OK, nerdscanner is installed"
+
+if [[ $1 != "--no-install-requirements" && $1 != '-nr' ]]; then
+    printf "OK\nInstalling requirements... "
+    python3 -m pip install -r /opt/nerdscanner/requirements.txt
+fi
+
+echo "OK, now, nerdscanner is installed"
