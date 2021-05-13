@@ -4,6 +4,17 @@ Inspired in the traditional tree command for linux. Show a recursive
 folder tree with the nerdfonts icons, icons for folders, icons, and
 use colors for the output.
 
+## Requirements
+
+The requirements list are:
+
+- A very pretty linux distribution
+- A nerd font used in your terminal
+- A very good and pretty configured terminal
+- Python
+- Git
+- Bash
+
 ## Install
 
 To install use the following commands:
