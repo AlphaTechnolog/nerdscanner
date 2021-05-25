@@ -107,8 +107,11 @@ def dir_scanner(path: Any, indent: int = 0):
         else:
             if (archive.is_dir() and
                     not archive.name in args.ignore):
-                print((" " * args.indent_size) * indent + f"{FOLDER_ICON} {get_archive_name(archive)}")
-                dir_scanner(archive, indent + 1)
+                if not args.no_recursive:
+                    print((" " * args.indent_size) * indent + f"{FOLDER_ICON} {get_archive_name(archive)}")
+                    dir_scanner(archive, indent + 1)
+                else:
+                    print((" " * args.indent_size) * indent + f"{NO_RECURSIVE_FOLDER_ICON} {get_archive_name(archive)}")
             elif not archive.name in args.ignore:
                 print((" " * args.indent_size) * indent + f"{FILE_ICON} {get_archive_name(archive)}")
 

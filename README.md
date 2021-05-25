@@ -84,6 +84,12 @@ the folder color is blue and the file color is green.
 To custom the output pass the next options:
 
 - `-i/--indent-size`: The indent size
+- `-I/--ignore`: Ignore a dirname of filename
+- `-nr/--no-recursive`: Show's a list of dir content with no recursive method (like ls)
+- `-H/--hidden`: Show the hidden files of dir content
+- `-NRD/--no-recursive-dir-icon`: The no recursive tree, directory icon
+- `-p/--path`: No show the name of dirent, show the path of the dirent.
+- `-h/--help`: Show an automatic help log.
 - `-F/--file-icon`: The file icon or prefix
 - `-D/--dir-icon`: The directory icon or prefix
 - `-dc`/`--dir-color`: The directory icon color
@@ -125,8 +131,56 @@ nerdscanner $HOME/testdir -i 2 -dc magenta -fc red
 
 With the colors changed
 
+```sh
+nerdscanner $HOME/testdir -nr
+```
+
+```
+ dir1
+ hello2
+ hello1
+ dir3
+ dir2
+```
+
+```sh
+mkdir $HOME/other
+cd $HOME/other
+git init # this create a folder named .git
+npm init -y
+npm install express morgan body-parser # this create a node_modules folder (like to ignore)
+touch .env
+echo 'node_modules' >> .env
+echo '.env' >> .env
+mkdir src
+echo 'const express = require("express"); const app = express(); app.listen(8000, () => console.log("Listening on port 8000..."))' >> src/index.js
+cd
+nerdscanner other -HI node_modules .git
+```
+
+```
+ .env
+ package.json
+  src
+   index.js
+```
+
+```sh
+nerdscanner other -HI node_modules .git -nr -NRD "FOLDER (no open)" -F "FILE" -i 4 -dc red -fc blue -p
+```
+
+```
+FILE other/.env
+FILE other/package.json
+FOLDER (no open) other/src
+```
+
 ## Screenshots
 
 ![nerdscanner-1](./.screenshot/nerdscanner.1.png)
 
 For more screenshots see [The screenshots gallery](./.screenshot)
+
+## Web
+
+See this documentation in the web! [Press me](https://alphatechnolog.github.io/nerdscanner/)
